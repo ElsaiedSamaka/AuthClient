@@ -1,10 +1,23 @@
 <h1>تسجيل جديد</h1>
 <h3>قم بالتسجيل لنتائج بحثية افضل</h3>
-<form [formGroup]="authForm">
-    <input type="text" formControlName="firstname">
-    <input type="text" formControlName="lastname">
-    <input type="tel" formControlName="phonenumber">
-    <input type="email" formControlName="email">
-    <input type="password" formControlName="password">
-    <input type="password" formControlName="passwordConfirmation">
+<form class="ui form" [formGroup]="authForm">
+    <div class="field">
+        <input type="text" formControlName="firstname" placeholder="الاسم الاول">
+    </div>
+    <div class="field">
+        <input type="text" formControlName="lastname" placeholder="الاسم الاخير">
+    </div>
+    <div class="field">
+        <input type="text" formControlName="phone" placeholder="رقم الجوال">
+    </div>
+    <div class="field">
+        <input type="email" formControlName="email" placeholder="البريد الالكتروني">
+    </div>
+    <div class="field">
+        <input type="password" formControlName="password" placeholder="كلمة المرور">
+    </div>
+    <div class="field">
+        <input type="password" formControlName="passwordConfirmation" placeholder="تأكيد كلمة المرور">
+    </div>
+    <button class="ui submit green button " type="submit">تسجيل</button>
 </form>
