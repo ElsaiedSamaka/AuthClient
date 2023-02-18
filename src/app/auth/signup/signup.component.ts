@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatchPassword } from "../validators/match-password";
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -7,11 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   authForm = new FormGroup({
-    firstname: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(15),
-    ]),
+    firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -45,9 +42,8 @@ export class SignupComponent implements OnInit {
       Validators.maxLength(25),
       Validators.pattern('^[0-9]*$'),
     ]),
-  });
+  }, { validators: [] });
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
   constructor() {}
 }
