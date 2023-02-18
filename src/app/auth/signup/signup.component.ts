@@ -1,18 +1,53 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   authForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    passwordConfirmation: new FormControl(''),
-    countrycode: new FormControl(''),
-    phonenumber: new FormControl(''),
+    firstname: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(15),
+    ]),
+    lastname: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(15),
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(25),
+    ]),
+    passwordConfirmation: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(25),
+    ]),
+    // TODO: Add country code
+    // countrycode: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(3),
+    //   Validators.maxLength(15),
+    // ]),
+    phonenumber: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(25),
+      Validators.pattern('^[0-9]*$'),
+    ]),
   });
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  constructor() {}
 }

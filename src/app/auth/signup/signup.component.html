@@ -2,22 +2,29 @@
 <h3>قم بالتسجيل لنتائج بحثية افضل</h3>
 <form class="ui form" [formGroup]="authForm">
     <div class="field">
+        <label>الاسم الاول</label>
         <input type="text" formControlName="firstname" placeholder="الاسم الاول">
     </div>
     <div class="field">
+        <label>الاسم الاخير</label>
         <input type="text" formControlName="lastname" placeholder="الاسم الاخير">
     </div>
     <div class="field">
-        <input type="text" formControlName="phone" placeholder="رقم الجوال">
+        <label>رقم الجوال</label>
+        <input type="text" formControlName="phonenumber" placeholder="رقم الجوال">
     </div>
     <div class="field">
+        <label>البريد الالكتروني</label>
         <input type="email" formControlName="email" placeholder="البريد الالكتروني">
     </div>
     <div class="field">
+        <label>كلمة المرور</label>
         <input type="password" formControlName="password" placeholder="كلمة المرور">
     </div>
     <div class="field">
+        <label>تأكيد كلمة المرور</label>
         <input type="password" formControlName="passwordConfirmation" placeholder="تأكيد كلمة المرور">
     </div>
+    {{authForm.value | json}}
     <button class="ui submit green button " type="submit">تسجيل</button>
 </form>
