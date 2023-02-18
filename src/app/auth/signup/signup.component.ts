@@ -42,8 +42,8 @@ export class SignupComponent implements OnInit {
       Validators.maxLength(25),
       Validators.pattern('^[0-9]*$'),
     ]),
-  }, { validators: [] });
+  }, { validators: [this.matchPassword.validate] });
   ngOnInit(): void {
   }
-  constructor() {}
+  constructor(private matchPassword:MatchPassword ) {}
 }
