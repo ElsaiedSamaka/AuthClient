@@ -4,8 +4,9 @@
     <div class="field">
         <label>الاسم الاول</label>
         <input type="text" formControlName="firstname" placeholder="الاسم الاول">
-        {{authForm.get('firstname')?.errors | json}}
     </div>
+    {{authForm.get('firstname')?.errors | json}}
+    <app-input label="firstname" [control]="authForm.get('firstname')"></app-input>
     <div class="field">
         <label>الاسم الاخير</label>
         <input type="text" formControlName="lastname" placeholder="الاسم الاخير">
