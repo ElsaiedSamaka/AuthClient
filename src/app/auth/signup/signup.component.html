@@ -4,27 +4,35 @@
     <div class="field">
         <label>الاسم الاول</label>
         <input type="text" formControlName="firstname" placeholder="الاسم الاول">
+        {{authForm.get('firstname')?.errors | json}}
     </div>
     <div class="field">
         <label>الاسم الاخير</label>
         <input type="text" formControlName="lastname" placeholder="الاسم الاخير">
     </div>
+    {{authForm.get('lastname')?.errors | json}}
     <div class="field">
         <label>رقم الجوال</label>
         <input type="text" formControlName="phonenumber" placeholder="رقم الجوال">
     </div>
+    {{authForm.get('phonenumber')?.errors | json}}
     <div class="field">
         <label>البريد الالكتروني</label>
         <input type="email" formControlName="email" placeholder="البريد الالكتروني">
     </div>
+    {{authForm.get('email')?.errors | json}}
     <div class="field">
         <label>كلمة المرور</label>
         <input type="password" formControlName="password" placeholder="كلمة المرور">
     </div>
+    {{authForm.get('password')?.errors | json}}
     <div class="field">
         <label>تأكيد كلمة المرور</label>
         <input type="password" formControlName="passwordConfirmation" placeholder="تأكيد كلمة المرور">
     </div>
-    {{authForm.value | json}}
+    {{authForm.get('passwordConfirmation')?.errors | json}}
     <button class="ui submit green button " type="submit">تسجيل</button>
 </form>
+{{authForm.value | json}}
+==========
+{{authForm.errors| json}}
