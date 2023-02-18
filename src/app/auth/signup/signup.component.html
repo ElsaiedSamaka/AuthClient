@@ -1,1 +1,10 @@
-<p>signup works!</p>
+<h1>تسجيل جديد</h1>
+<h3>قم بالتسجيل لنتائج بحثية افضل</h3>
+<form [formGroup]="authForm">
+    <input type="text" formControlName="firstname">
+    <input type="text" formControlName="lastname">
+    <input type="tel" formControlName="phonenumber">
+    <input type="email" formControlName="email">
+    <input type="password" formControlName="password">
+    <input type="password" formControlName="passwordConfirmation">
+</form>
