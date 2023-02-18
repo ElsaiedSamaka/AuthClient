@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractControl, AsyncValidator } from '@angular/forms';
+import { catchError, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UniqueEmail implements AsyncValidator {
@@ -9,8 +10,15 @@ export class UniqueEmail implements AsyncValidator {
     const { value } = control;
     const user = JSON.stringify(value);
     console.log(user);
-    return this.http.post<any>('http://localhost:3000/api/auth/username', {
-      email: value,
-    });
+    return this.http
+      .post<any>('http://localhost:3000/api/auth/username', {
+        email: value,
+      })
+      .pipe(
+        catchError((err) => {
+          return of({ isEmailUnique: false });
+        })
+      );
+    
   };
 }
