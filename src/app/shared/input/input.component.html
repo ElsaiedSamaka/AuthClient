@@ -1,4 +1,4 @@
-<div class="fie">
+<div class="field" [ngClass]="control.invalid && showErrors() ? 'error' : ''">
     <label>{{label}}</label>
     <input [formControl]="control" [placeholder]="placeholder" [type]="type" />
     <div *ngIf="showErrors()" class="ui pointing red basic label">

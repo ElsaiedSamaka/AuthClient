@@ -1,24 +1,63 @@
 <h1>تسجيل جديد</h1>
 <h3>قم بالتسجيل لنتائج بحثية افضل</h3>
-<form class="ui form" [formGroup]="authForm">
-    <app-input label="الاسم الاول" [control]="authForm.get('firstname')" placeholder="الاسم الاول" type="text"></app-input>
-    <app-input label="الاسم الاخير" [control]="authForm.get('lastname')" placeholder="الاسم الاخير" type="text"></app-input>
-    <app-input label="رقم الجوال" [control]="authForm.get('phonenumber')" placeholder="رقم الجوال"
-        type="number"></app-input>
-    <app-input label="البريد الالكتروني" [control]="authForm.get('email')" placeholder="البريد الالكتروني"
-        type="email"></app-input>
-    <app-input label="كلمة المرور" [control]="authForm.get('password')" placeholder="كلمة المرور"
+    <form class="ui form error" [formGroup]="authForm">
+        <div class="fields">
+            <div class="eight wide field">
+                <app-input [control]="authForm.get('firstname')" placeholder="الاسم الاول" type="text"></app-input>
+            </div>
+            <div class="eight wide field">
+                <app-input [control]="authForm.get('lastname')" placeholder="الاسم الاخير" type="text"></app-input>
+            </div>
+        </div>
+        <div class="fields">
+            <div class="eight wide field">
+                <app-input [control]="authForm.get('email')" placeholder="البريد الالكتروني" type="email"></app-input>
+            </div>
+            <div class="six wide field">
+                <app-input [control]="authForm.get('phonenumber')" placeholder="رقم الجوال" type="number"></app-input>
+            </div>
+            <div class="two wide field">
+                <!-- TODO: setup countrycode ddl functionality -->
+                <em> country code</em>
+            </div>
+    
+    
+        </div>
+        <app-input [control]="authForm.get('password')" placeholder="كلمة المرور"
         type="password"></app-input>
-    <app-input label="تأكيد كلمة المرور" [control]="authForm.get('passwordConfirmation')" placeholder="تأكيد كلمة المرور"
+    <app-input [control]="authForm.get('passwordConfirmation')" placeholder="تأكيد كلمة المرور"
         type="password"></app-input>
-    <!-- TODO: setup and configure checkbox functionality -->
+        <div *ngIf="authForm.get('password').touched && authForm.get('passwordConfirmation').touched && authForm.errors"
+            class="ui red basic pointing label">
+            <p *ngIf="authForm.errors['passwordsDontMatch']">كلمة المرور غير متطابقة</p>
+        </div>
+        <br />
+        <!-- TODO: setup and configure كافة الشروط والأحكام checkbox functionality -->
     <div class="ui checkbox">
         <input type="checkbox" tabindex="0" class="hidden">
-        <label>أوافق على الشروط والأحكام</label>
+        <label>أوافق على كافة الشروط والأحكام</label>
+        </div>
+        <br />
+        <!-- TODO: setup and configure ارسال رمز التحقق radio button functionality -->
+        <div class="inline fields">
+        
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" tabindex="0" class="hidden">
+                    <label>البريد الالكتروني</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" checked="" tabindex="0" class="hidden">
+                    <label>رقم الجوال </label>
+                </div>
+            </div>
+            <label>ارسال رمز التحقق من خلال</label>
     </div>
+
     <button class="ui submit green button " type="submit">تسجيل</button>
     </form>
-
     
 <!-- {{authForm.value | json}}
 ==========
