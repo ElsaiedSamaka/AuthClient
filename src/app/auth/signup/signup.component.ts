@@ -10,7 +10,11 @@ import { UniqueEmail } from '../validators/unique-email';
 export class SignupComponent implements OnInit {
   authForm = new FormGroup(
     {
-      firstname: new FormControl('', Validators.required),
+      firstname: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15),
+      ]),
       lastname: new FormControl('', [
         Validators.required,
         Validators.minLength(3),

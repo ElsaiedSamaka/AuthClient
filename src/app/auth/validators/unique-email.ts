@@ -11,7 +11,7 @@ export class UniqueEmail implements AsyncValidator {
 
     return this.authService.emailAvailable(value).pipe(
       catchError((err) => {
-        return of({ isEmailUnique: false });
+        return of({ notEmailUnique: true });
       })
     );
   };

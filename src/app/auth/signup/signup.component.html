@@ -1,39 +1,33 @@
 <h1>تسجيل جديد</h1>
 <h3>قم بالتسجيل لنتائج بحثية افضل</h3>
 <form class="ui form" [formGroup]="authForm">
-    <div class="field">
-        <label>الاسم الاول</label>
-        <input type="text" formControlName="firstname" placeholder="الاسم الاول">
+    <app-input label="الاسم الاول" [control]="authForm.get('firstname')" placeholder="الاسم الاول" type="text"></app-input>
+    <app-input label="الاسم الاخير" [control]="authForm.get('lastname')" placeholder="الاسم الاخير" type="text"></app-input>
+    <app-input label="رقم الجوال" [control]="authForm.get('phonenumber')" placeholder="رقم الجوال"
+        type="number"></app-input>
+    <app-input label="البريد الالكتروني" [control]="authForm.get('email')" placeholder="البريد الالكتروني"
+        type="email"></app-input>
+    <app-input label="كلمة المرور" [control]="authForm.get('password')" placeholder="كلمة المرور"
+        type="password"></app-input>
+    <app-input label="تأكيد كلمة المرور" [control]="authForm.get('passwordConfirmation')" placeholder="تأكيد كلمة المرور"
+        type="password"></app-input>
+    <!-- TODO: setup and configure checkbox functionality -->
+    <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden">
+        <label>أوافق على الشروط والأحكام</label>
     </div>
-    {{authForm.get('firstname')?.errors | json}}
-    <app-input label="firstname" [control]="authForm.get('firstname')"></app-input>
-    <div class="field">
-        <label>الاسم الاخير</label>
-        <input type="text" formControlName="lastname" placeholder="الاسم الاخير">
-    </div>
-    {{authForm.get('lastname')?.errors | json}}
-    <div class="field">
-        <label>رقم الجوال</label>
-        <input type="text" formControlName="phonenumber" placeholder="رقم الجوال">
-    </div>
-    {{authForm.get('phonenumber')?.errors | json}}
-    <div class="field">
-        <label>البريد الالكتروني</label>
-        <input type="email" formControlName="email" placeholder="البريد الالكتروني">
-    </div>
-    {{authForm.get('email')?.errors | json}}
-    <div class="field">
-        <label>كلمة المرور</label>
-        <input type="password" formControlName="password" placeholder="كلمة المرور">
-    </div>
-    {{authForm.get('password')?.errors | json}}
-    <div class="field">
-        <label>تأكيد كلمة المرور</label>
-        <input type="password" formControlName="passwordConfirmation" placeholder="تأكيد كلمة المرور">
-    </div>
-    {{authForm.get('passwordConfirmation')?.errors | json}}
     <button class="ui submit green button " type="submit">تسجيل</button>
-</form>
-{{authForm.value | json}}
+    </form>
+
+    
+<!-- {{authForm.value | json}}
 ==========
 {{authForm.errors| json}}
+==========
+{{authForm.get('firstname')?.errors | json}}
+==========
+{{authForm.get('email')?.errors | json}}
+==========
+{{authForm.get('password')?.errors | json}}
+==========
+{{authForm.get('passwordConfirmation')?.errors | json}} -->
