@@ -1,6 +1,6 @@
 <h1>تسجيل جديد</h1>
 <h3>قم بالتسجيل لنتائج بحثية افضل</h3>
-    <form class="ui form error" [formGroup]="authForm">
+    <form class="ui form error" [formGroup]="authForm" (ngSubmit)="onSubmit()">
         <div class="fields">
             <div class="eight wide field">
                 <app-input [control]="authForm.get('firstname')" placeholder="الاسم الاول" type="text"></app-input>
