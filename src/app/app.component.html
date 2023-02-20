@@ -1,3 +1,27 @@
+<div class="ui container">
+    <div class="ui secondary poninting menu">
+        <a routerLink="/" class="item">مؤقت للتيست</a>
+        <div class="left menu">
+            <ng-container *ngIf="signedin$ |async">
+                <a class="ui item" routerLink="/index" routerLinkActive="active">
+                    الرئيسية
+                </a>
 
+            <a class="ui item" routerLink="/signout" routerLinkActive="active">
+                تسجيل الخروج
+            </a>
+            </ng-container>
+            <ng-container *ngIf="!(signedin$ | async)">
+                <a class="ui item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    تسجيل الدخول
+                </a>
+            
+            <a class="ui item" routerLink="/signup" routerLinkActive="active">
+                تسجيل جديد
+            </a>
+            </ng-container>
+            </div>
+            </div>
+    <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>
