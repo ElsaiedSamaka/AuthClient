@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+interface EmailAvailableResponse {
+  message: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -8,9 +12,12 @@ export class AuthService {
   rootUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
   emailAvailable(email: string) {
-    return this.http.post<any>(`${this.rootUrl}/api/auth/username`, {
-      email: email,
-    });
+    return this.http.post<EmailAvailableResponse>(
+      `${this.rootUrl}/api/auth/username`,
+      {
+        email: email,
+      }
+    );
   }
   signup(
     firstname: string,

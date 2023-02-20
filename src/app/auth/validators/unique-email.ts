@@ -17,9 +17,12 @@ export class UniqueEmail implements AsyncValidator {
 
     return this.authService.emailAvailable(value).pipe(
       map((value) => {
-        if (value.available) {
+        if (value.message === 'User email is available!') {
           return null;
+        } else if (value.message === 'Failed! Email is already in use!') {
+          return { notEmailUnique: true };
         }
+        return null;
       }),
       catchError((err) => {
         return of({ notEmailUnique: true });
