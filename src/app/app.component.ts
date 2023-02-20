@@ -18,5 +18,9 @@ export class AppComponent {
   // if they are, we should set the signedin$ subject to true
   ngOnInit(): void {
     this.authService.checkAuth().subscribe(() => {});
+    // test log out functionality
+    // setTimeout(() => {
+    //   this.authService.signout().subscribe(() => {});
+    // }, 9000);
   }
 }

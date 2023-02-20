@@ -54,9 +54,17 @@ export class AuthService {
   // we can use this to check if the user is authenticated
   checkAuth() {
     return this.http.get<any>(`${this.rootUrl}/api/auth/signedin`).pipe(
-      tap((response) => {
-        // this.signedin$.next(authenticated);
-        console.log(response);
+      tap(({ authentication }) => {
+        this.signedin$.next(authentication);
+      })
+    );
+  }
+  // signout will be called when the user clicks the signout button
+  // we will send a request to the server to sign the user out
+  signout() {
+    return this.http.post<any>(`${this.rootUrl}/api/auth/signout`, {}).pipe(
+      tap(() => {
+        this.signedin$.next(false);
       })
     );
   }
