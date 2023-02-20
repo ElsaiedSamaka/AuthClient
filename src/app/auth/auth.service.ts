@@ -5,9 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
+  rootUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
   emailAvailable(email: string) {
-    return this.http.post<any>('http://localhost:3000/api/auth/username', {
+    return this.http.post<any>(`${this.rootUrl}/api/auth/username`, {
       email: email,
     });
   }
@@ -19,7 +20,7 @@ export class AuthService {
     passwordConfirmation: string,
     phonenumber: string
   ) {
-    return this.http.post<any>('http://localhost:3000/api/auth/signup', {
+    return this.http.post<any>(`${this.rootUrl}/api/auth/signup`, {
       firstname: firstname,
       lastname: lastname,
       email: email,
