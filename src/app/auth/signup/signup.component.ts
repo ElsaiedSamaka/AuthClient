@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueEmail } from '../validators/unique-email';
@@ -60,7 +61,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private matchPassword: MatchPassword,
     private uniqueEmail: UniqueEmail,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
   onSubmit() {
     if (this.authForm.invalid) {
@@ -77,8 +79,8 @@ export class SignupComponent implements OnInit {
       )
       .subscribe({
         next: (response) => {
-          // TODO: Add redirect to home page
-          console.log(response);
+          // TODO: Add redirect to home page instead of signin page 
+          this.router.navigateByUrl('/');
         },
         error: (err) => {
           if (!err.status) {

@@ -68,4 +68,18 @@ export class AuthService {
       })
     );
   }
+  // signin will be called when the user submits the signin form
+  // we will send the user's credentials to the server
+  signin(email: string, password: string) {
+    return this.http
+      .post<any>(`${this.rootUrl}/api/auth/signin`, {
+        email: email,
+        password: password,
+      })
+      .pipe(
+        tap(() => {
+          this.signedin$.next(true);
+        })
+      );
+  }
 }
