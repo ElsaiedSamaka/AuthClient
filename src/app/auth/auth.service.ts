@@ -22,8 +22,7 @@ export class AuthService {
       `${this.rootUrl}/api/auth/username`,
       {
         email: email,
-      },
-      { withCredentials: true }
+      }
     );
   }
   // signup will be called when the user submits the signup form
@@ -37,18 +36,14 @@ export class AuthService {
     phonenumber: string
   ) {
     return this.http
-      .post<any>(
-        `${this.rootUrl}/api/auth/signup`,
-        {
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          password: password,
-          passwordConfirmation: passwordConfirmation,
-          phonenumber: phonenumber,
-        },
-        { withCredentials: true }
-      )
+      .post<any>(`${this.rootUrl}/api/auth/signup`, {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        passwordConfirmation: passwordConfirmation,
+        phonenumber: phonenumber,
+      })
       .pipe(
         tap(() => {
           this.signedin$.next(true);
@@ -58,13 +53,11 @@ export class AuthService {
   // checkAuth will be called whenever our app component is initialized
   // we can use this to check if the user is authenticated
   checkAuth() {
-    return this.http
-      .get<any>(`${this.rootUrl}/api/auth/signedin`, { withCredentials: true })
-      .pipe(
-        tap((response) => {
-          // this.signedin$.next(authenticated);
-          console.log(response);
-        })
-      );
+    return this.http.get<any>(`${this.rootUrl}/api/auth/signedin`).pipe(
+      tap((response) => {
+        // this.signedin$.next(authenticated);
+        console.log(response);
+      })
+    );
   }
 }

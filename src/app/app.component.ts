@@ -17,6 +17,6 @@ export class AppComponent {
   // whenever our app component is initialized, we want to check if the user is authenticated
   // if they are, we should set the signedin$ subject to true
   ngOnInit(): void {
-    this.authService.checkAuth().subscribe();
+    this.authService.checkAuth().subscribe(() => {});
   }
 }
