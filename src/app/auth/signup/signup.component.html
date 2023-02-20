@@ -30,6 +30,8 @@
         <div *ngIf="authForm.get('password').touched && authForm.get('passwordConfirmation').touched && authForm.errors"
             class="ui red basic pointing label">
             <p *ngIf="authForm.errors['passwordsDontMatch']">كلمة المرور غير متطابقة</p>
+            <p *ngIf="authForm.errors['noConnection']">عفوا, يرجى التحقق من اتصال الانترنت</p>
+            <p *ngIf="authForm.errors['unknownError']">خطأ غير متوقع</p>
         </div>
         <br />
         <!-- TODO: setup and configure كافة الشروط والأحكام checkbox functionality -->

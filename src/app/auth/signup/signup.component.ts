@@ -77,7 +77,15 @@ export class SignupComponent implements OnInit {
       )
       .subscribe({
         next: (response) => {
+          // TODO: Add redirect to home page
           console.log(response);
+        },
+        error: (err) => {
+          if (!err.status) {
+            this.authForm.setErrors({ noConnection: true });
+          } else {
+            this.authForm.setErrors({ unknownError: true });
+          }
         },
       });
   }
