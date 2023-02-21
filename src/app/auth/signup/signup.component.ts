@@ -79,8 +79,7 @@ export class SignupComponent implements OnInit {
       )
       .subscribe({
         next: (response) => {
-          // TODO: Add redirect to home page instead of signin page 
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/index');
         },
         error: (err) => {
           if (!err.status) {

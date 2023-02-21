@@ -32,8 +32,7 @@ export class SigninComponent {
       .signin(this.authForm.value.email, this.authForm.value.password)
       .subscribe({
         next: () => {
-          // TODO: Add redirect to home page instead of signup page
-          this.router.navigateByUrl('/signup');
+          this.router.navigateByUrl('/index');
         },
         error: (err) => {
           if (!err.status) {
