@@ -1,2 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "semantic-ui-css/semantic.css"; */
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300&display=swap');
+body{
+    font-family: 'Almarai', sans-serif;
+    background-color: #f5f5f5;
+}
