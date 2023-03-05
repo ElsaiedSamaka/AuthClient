@@ -46,7 +46,7 @@ export class AuthService {
         password: password,
         passwordConfirmation: passwordConfirmation,
         phonenumber: phonenumber,
-      })
+      },{withCredentials: true})
       .pipe(
         tap(() => {
           this.signedin$.next(true);
@@ -56,7 +56,7 @@ export class AuthService {
   // checkAuth will be called whenever our app component is initialized
   // we can use this to check if the user is authenticated
   checkAuth() {
-    return this.http.get<any>(`${this.rootUrl}/api/auth/signedin`).pipe(
+    return this.http.get<any>(`${this.rootUrl}/api/auth/signedin`,{withCredentials:true}).pipe(
       tap(({ authentication }) => {
         this.signedin$.next(authentication);
       })
@@ -75,10 +75,14 @@ export class AuthService {
   // we will send the user's credentials to the server
   signin(email: string, password: string) {
     return this.http
-      .post<any>(`${this.rootUrl}/api/auth/signin`, {
-        email: email,
-        password: password,
-      })
+      .post<any>(
+        `${this.rootUrl}/api/auth/signin`,
+        {
+          email: email,
+          password: password,
+        },
+        { withCredentials: true }
+      )
       .pipe(
         tap(() => {
           this.signedin$.next(true);
