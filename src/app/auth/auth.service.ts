@@ -10,7 +10,7 @@ interface EmailAvailableResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  rootUrl = 'http://localhost:3000';
+  rootUrl = 'https://authbackend-iher.onrender.com';
   // TODO: Right now we are using a BehaviorSubject to store the signed in status of the user
   // This is not the best way to do this, but it is the easiest way to get started
   // We will need to change this public property to a private property
