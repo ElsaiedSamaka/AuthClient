@@ -23,4 +23,10 @@ export class AppComponent {
     //   this.authService.signout().subscribe(() => {});
     // }, 9000);
   }
+  googleLogin() {
+    this.authService.googleLogin().subscribe(() => {});
+  }
+  facebookLogin() {
+    this.authService.facebookLogin().subscribe(() => {});
+  }
 }
