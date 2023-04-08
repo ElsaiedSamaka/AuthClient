@@ -1,7 +1,7 @@
 <div class="ui right floated pagination menu">
   <a class="icon item">
     <button [disabled]="current <= 0">
-      <i class="left chevron icon" (click)="onPrevious()"></i>
+      <i class="right chevron icon" (click)="onPrevious()"></i>
     </button>
   </a>
   <ng-container *ngFor="let page of pages; index as i">
@@ -14,7 +14,7 @@
   </ng-container>
   <a class="icon item">
     <button [disabled]="current === total">
-      <i class="right chevron icon" (click)="onNext()"></i>
+      <i class="left chevron icon" (click)="onNext()"></i>
     </button>
   </a>
 </div>
