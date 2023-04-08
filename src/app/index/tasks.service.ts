@@ -8,8 +8,10 @@ export class TasksService {
   rootUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
-  getAllTasks() {
-    return this.http.get(`${this.rootUrl}/tasks`);
+  getAllTasks(page: number, perPage: number) {
+    return this.http.get(
+      `${this.rootUrl}/tasks?page=${page}&perPage=${perPage}`
+    );
   }
   getCurrentUserTasks() {
     return this.http.get(`${this.rootUrl}/tasks/user-tasks`);

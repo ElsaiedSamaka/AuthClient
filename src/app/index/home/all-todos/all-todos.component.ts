@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { TasksService } from '../../tasks.service';
 
 @Component({
@@ -8,7 +8,9 @@ import { TasksService } from '../../tasks.service';
 })
 export class AllTodosComponent implements OnInit {
   users$;
-  tasks$;
+  tasks$: any[] = [];
+  totalItems: any = 0;
+  totalPages: any = 0;
   table_columns = [
     { name: 'id', label: 'ID' },
     { name: 'title', label: 'العنوان' },
@@ -17,20 +19,57 @@ export class AllTodosComponent implements OnInit {
     { name: 'deadline', label: 'الموعد النهائي' },
   ];
 
+  // pagination
+  current = 0;
+  perPage = 5;
+  // total = Math.ceil(this.totalItems / this.perPage);
+  onGoTo(page: number): void {
+    this.current = page;
+    this.paginate(this.current, this.perPage);
+  }
+  onNext(page: number): void {
+    if (this.current < this.totalItems) {
+      this.current = page + 1;
+      this.paginate(this.current, this.perPage);
+    }
+  }
+  onPrevious(page: number): void {
+    if (this.current > 1) {
+      this.current = page - 1;
+      this.paginate(this.current, this.perPage);
+    }
+  }
+  paginate(current: number, perPage: number) {
+    this.getAllTasks();
+  }
   constructor(private tasksservice: TasksService) {}
 
   ngOnInit() {
     this.getAllTasks();
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      (changes['current'] && changes['current'].currentValue) ||
+      (changes['totalItems'] && changes['totalItems'].currentValue)
+    ) {
+      this.paginate(this.current, this.perPage);
+    }
+  }
   getAllTasks() {
-    this.tasksservice.getAllTasks().subscribe((response) => {
-      this.tasks$ = response['tasks'];
-      console.log(this.tasks$);
-    });
+    this.tasksservice
+      .getAllTasks(this.current, this.perPage)
+      .subscribe((response) => {
+        console.log(response);
+        this.tasks$ = response['tasks'];
+        this.totalItems = response['totalItems'];
+        this.totalPages = response['totalPages'];
+      });
   }
   getCurrentUserTasks() {
     this.tasksservice.getCurrentUserTasks().subscribe((response) => {
       this.tasks$ = response['tasks'];
+      this.totalItems = response['totalItems'];
+      this.totalPages = response['totalPages'];
     });
   }
 
