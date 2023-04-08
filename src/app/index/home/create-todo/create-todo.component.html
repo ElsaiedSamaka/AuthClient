@@ -1,0 +1,40 @@
+<div class="ui green button" (click)="onClick()">اضافة </div>
+<app-model (dismiss)="onClick()" *ngIf="showModel">
+
+  <div header>
+    <h2>اضافة مهمة جديدة</h2>
+  </div>
+  <div content>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="ui form">
+        <div class="inline fields">
+          <div class="three wide field">
+            <input formControlName="title" type="text" placeholder="عنوان المهمة">
+          </div>
+          <div class="eight wide field">
+            <input formControlName="description" type="text" placeholder="وصف المهمة">
+          </div>
+          <div class="todo-user three wide field">
+            <select formControlName="userId" name=" user" id="user">
+              <option *ngFor="let user of users$" [value]="user.id">{{user.username}}</option>
+            </select>
+          </div>
+          <div class="todo-user three wide field">
+            <input formControlName="deadline" type="date">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div footer>
+        <div class="ui black right labeled icon deny button" (click)="onClick()">
+          الغاء
+          <i class="cancel icon"></i>
+        </div>
+        <button type="submit" [disabled]="taskForm.invalid" class="ui positive right labeled icon button">
+          اضافة
+          <i class="checkmark icon"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</app-model>

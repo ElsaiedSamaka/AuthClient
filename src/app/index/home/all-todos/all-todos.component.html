@@ -1,0 +1,58 @@
+<form>
+  <div class="ui form">
+    <div class="inline fields">
+      <div class="three wide field">
+        <!-- (keyup)="" -->
+        <input type="text" placeholder="بحث بالعنوان...">
+      </div>
+      <div class=" eight wide field">
+        <!-- #TODO: add support for description search -->
+        <!-- (keyup)="" -->
+        <input disabled type="text" placeholder="بحث بالوصف ..">
+      </div>
+      <div class="todo-user three wide field">
+        <!-- #TODO: add support for users filteration -->
+        <!-- (selectionChange)="" -->
+        <select name=" user" id="user">
+          <option *ngFor="let user of (users$|async)" value="user.username" selected="">"user.name"</option>
+        </select>
+      </div>
+      <!-- #TODO: add support for period filteration -->
+      <div class="todo-user three wide field">
+        <label for=""> من </label>
+        <!-- (dateChange)="" -->
+        <input disabled type="date">
+      </div>
+      <div class="todo-user three wide field">
+        <label for=""> الى </label>
+        <!-- (dateChange)="" -->
+        <input disabled type="date">
+      </div>
+      <app-create-todo></app-create-todo>
+    </div>
+  </div>
+</form>
+<table class="ui green striped table">
+  <thead>
+    <tr>
+      <th *ngFor="let headline of table_columns">{{headline.label}}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks$ ;let i = index">
+
+      <td>{{task.id}}</td>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>{{task.userId}}</td>
+      <td>{{task.deadline}}</td>
+
+      <td>
+        <a [routerLink]="task.id">
+          التفاصيل
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

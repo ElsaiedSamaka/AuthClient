@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 
@@ -10,13 +10,9 @@ interface EmailAvailableResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  // rootUrl = 'http://localhost:3000';
-  rootUrl = 'https://authbackend-iher.onrender.com';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-    }),
-  };
+  rootUrl = 'http://localhost:3000';
+  // rootUrl = 'https://authbackend-iher.onrender.com';
+
   // TODO: Right now we are using a BehaviorSubject to store the signed in status of the user
   // This is not the best way to do this, but it is the easiest way to get started
   // We will need to change this public property to a private property
@@ -96,25 +92,17 @@ export class AuthService {
       );
   }
   googleLogin() {
-    return this.http
-      .get(`${this.rootUrl}/api/auth/google`, {
-        headers: this.httpOptions.headers,
+    return this.http.get(`${this.rootUrl}/api/auth/google`).pipe(
+      tap(() => {
+        this.signedin$.next(true);
       })
-      .pipe(
-        tap(() => {
-          this.signedin$.next(true);
-        })
-      );
+    );
   }
   facebookLogin() {
-    return this.http
-      .get(`${this.rootUrl}/api/auth/facebook`, {
-        headers: this.httpOptions.headers,
+    return this.http.get(`${this.rootUrl}/api/auth/facebook`).pipe(
+      tap(() => {
+        this.signedin$.next(true);
       })
-      .pipe(
-        tap(() => {
-          this.signedin$.next(true);
-        })
-      );
+    );
   }
 }

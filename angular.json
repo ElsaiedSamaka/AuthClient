@@ -66,6 +66,10 @@
               "browserTarget": "AuthClient:build:development"
             }
           },
+          "options": {
+            "browserTarget": "AuthClient:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
