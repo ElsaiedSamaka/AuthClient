@@ -10,7 +10,7 @@ export class AllTodosComponent implements OnInit {
   users$;
   tasks$: any[] = [];
   totalItems: any = 0;
-  totalPages: any = 0;
+  totalPages: number = 0;
   table_columns = [
     { name: 'id', label: 'ID' },
     { name: 'title', label: 'العنوان' },
@@ -28,7 +28,7 @@ export class AllTodosComponent implements OnInit {
     this.paginate(this.current, this.perPage);
   }
   onNext(page: number): void {
-    if (this.current < this.totalItems) {
+    if (this.current < this.totalPages) {
       this.current = page + 1;
       this.paginate(this.current, this.perPage);
     }
@@ -63,6 +63,7 @@ export class AllTodosComponent implements OnInit {
         this.tasks$ = response['tasks'];
         this.totalItems = response['totalItems'];
         this.totalPages = response['totalPages'];
+        console.log(this.totalPages);
       });
   }
   getCurrentUserTasks() {

@@ -16,6 +16,7 @@ export class PaginationComponent implements OnInit {
   ngOnInit() {}
   @Input() current: number = 0;
   @Input() total: number = 0;
+  @Input() totalPages: number = 0;
 
   @Output() goTo: EventEmitter<number> = new EventEmitter<number>();
   @Output() next: EventEmitter<number> = new EventEmitter<number>();
@@ -46,19 +47,26 @@ export class PaginationComponent implements OnInit {
   }
   // right now we are getting our pages in the following format:
   private getPages(current: number, total: number): number[] {
-    console.log(total);
     if (total <= 7) {
       return [...Array(total)].map((x) => ++x);
     }
 
     if (current > 5) {
       if (current >= total - 4) {
-        return [1, -1, total - 4, total - 3, total - 2, total - 1, total];
+        return [
+          1,
+          -1,
+          total - 4,
+          total - 3,
+          total - 2,
+          total - 1,
+          this.totalPages,
+        ];
       } else {
-        return [1, -1, current - 1, current, current + 1, -1, total];
+        return [1, -1, current - 1, current, current + 1, -1, this.totalPages];
       }
     }
 
-    return [1, 2, 3, 4, 5, -1, total];
+    return [1, 2, 3, 4, 5, -1, this.totalPages];
   }
 }
