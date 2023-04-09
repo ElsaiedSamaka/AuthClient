@@ -1,5 +1,8 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { TasksService } from '../../tasks.service';
+import { UsersService } from '../../users.service';
 
 @Component({
   selector: 'app-all-todos',
@@ -8,9 +11,12 @@ import { TasksService } from '../../tasks.service';
 })
 export class AllTodosComponent implements OnInit {
   users$;
-  tasks$: any[] = [];
+  tasks$;
   totalItems: any = 0;
   totalPages: number = 0;
+  title: string = '';
+  searchInput = new FormControl('');
+
   table_columns = [
     { name: 'id', label: 'ID' },
     { name: 'title', label: 'العنوان' },
@@ -21,20 +27,19 @@ export class AllTodosComponent implements OnInit {
 
   // pagination
   current = 0;
-  perPage = 5;
-  // total = Math.ceil(this.totalItems / this.perPage);
+  perPage = 10;
   onGoTo(page: number): void {
     this.current = page;
     this.paginate(this.current, this.perPage);
   }
   onNext(page: number): void {
-    if (this.current < this.totalPages) {
+    if (this.current <= this.totalPages) {
       this.current = page + 1;
       this.paginate(this.current, this.perPage);
     }
   }
   onPrevious(page: number): void {
-    if (this.current > 1) {
+    if (this.current >= 1) {
       this.current = page - 1;
       this.paginate(this.current, this.perPage);
     }
@@ -42,10 +47,23 @@ export class AllTodosComponent implements OnInit {
   paginate(current: number, perPage: number) {
     this.getAllTasks();
   }
-  constructor(private tasksservice: TasksService) {}
+  constructor(
+    private tasksservice: TasksService,
+    private usersService: UsersService
+  ) {}
 
   ngOnInit() {
+    this.searchInput.valueChanges
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged(),
+        switchMap((res) => this.tasksservice.getAllTasks(res, this.current))
+      )
+      .subscribe((response) => {
+        this.tasks$ = response['tasks'];
+      });
     this.getAllTasks();
+    this.getAllUsers();
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (
@@ -55,42 +73,26 @@ export class AllTodosComponent implements OnInit {
       this.paginate(this.current, this.perPage);
     }
   }
+
   getAllTasks() {
     this.tasksservice
-      .getAllTasks(this.current, this.perPage)
+      .getAllTasks(this.title, this.current)
       .subscribe((response) => {
-        console.log(response);
         this.tasks$ = response['tasks'];
         this.totalItems = response['totalItems'];
         this.totalPages = response['totalPages'];
-        console.log(this.totalPages);
       });
   }
-  getCurrentUserTasks() {
-    this.tasksservice.getCurrentUserTasks().subscribe((response) => {
-      this.tasks$ = response['tasks'];
-      this.totalItems = response['totalItems'];
-      this.totalPages = response['totalPages'];
+  getAllUsers() {
+    this.usersService.getAllUsers().subscribe((users) => {
+      this.users$ = users;
     });
   }
-
-  getTasks() {
-    // i should pipe to the value changes of the input
-    // and make an api call to the backend based on the value
-    // using switchMap() to cancel the previous request
-    // ref: https://medium.com/lapis/searching-through-a-list-reactively-in-angular-c61c9d1832df
-    // this.tasks$ = this.tasksservice.getTasks().pipe(
-    //   map((tasks: string) => tasks.trim()),
-    //   debounceTime(200),
-    //   distinctUntilChanged(),
-    //   tap((tasks) => {
-    //     this.tasks$ = tasks;
-    //   })
-    // );
-  }
-  filterTasks() {
-    // this.tasksservice.filterTasks().subscribe((tasks) => {
-    //   this.tasks$ = tasks;
-    // });
-  }
+  // getCurrentUserTasks() {
+  //   this.tasksservice.getCurrentUserTasks().subscribe((response) => {
+  //     this.tasks$ = response['tasks'];
+  //     this.totalItems = response['totalItems'];
+  //     this.totalPages = response['totalPages'];
+  //   });
+  // }
 }

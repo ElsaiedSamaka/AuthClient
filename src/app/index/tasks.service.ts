@@ -5,13 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TasksService {
-  rootUrl = 'http://localhost:3000/api';
+  // rootUrl = 'http://localhost:3000/api';
+  rootUrl = 'https://authbackend-iher.onrender.com/api';
 
   constructor(private http: HttpClient) {}
-  getAllTasks(page: number, perPage: number) {
-    return this.http.get(
-      `${this.rootUrl}/tasks?page=${page}&perPage=${perPage}`
-    );
+  getAllTasks(title: string, page: number) {
+    return this.http.get(`${this.rootUrl}/tasks?title=${title}&page=${page}`);
   }
   getCurrentUserTasks() {
     return this.http.get(`${this.rootUrl}/tasks/user-tasks`);

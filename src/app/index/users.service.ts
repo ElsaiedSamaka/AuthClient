@@ -6,7 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class UsersService {
   constructor(private http: HttpClient) {}
-  rootUrl = 'http://localhost:3000/api';
+  // rootUrl = 'http://localhost:3000/api';
+  rootUrl = 'https://authbackend-iher.onrender.com/api';
+
   getAllUsers() {
     return this.http.get(`${this.rootUrl}/users`);
   }

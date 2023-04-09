@@ -2,30 +2,22 @@
   <div class="ui form">
     <div class="inline fields">
       <div class="three wide field">
-        <!-- (keyup)="" -->
-        <input type="text" placeholder="بحث بالعنوان...">
+        <input type="text" placeholder="بحث بالعنوان..." [formControl]="searchInput">
       </div>
       <div class=" eight wide field">
-        <!-- #TODO: add support for description search -->
-        <!-- (keyup)="" -->
         <input disabled type="text" placeholder="بحث بالوصف ..">
       </div>
       <div class="todo-user three wide field">
-        <!-- #TODO: add support for users filteration -->
-        <!-- (selectionChange)="" -->
-        <select name=" user" id="user">
-          <option *ngFor="let user of (users$|async)" value="user.username" selected="">"user.name"</option>
+      <select name="user" id="user" disabled>
+        <option *ngFor="let user of users$ " [value]="user.id">{{user.username}}</option>
         </select>
       </div>
-      <!-- #TODO: add support for period filteration -->
       <div class="todo-user three wide field">
         <label for=""> من </label>
-        <!-- (dateChange)="" -->
         <input disabled type="date">
       </div>
       <div class="todo-user three wide field">
         <label for=""> الى </label>
-        <!-- (dateChange)="" -->
         <input disabled type="date">
       </div>
       <app-create-todo></app-create-todo>
